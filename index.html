@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Questionnaire Xeno - Démo</title>
+<title>Questionnaire Xeno</title>
 
 <style>
 * {
@@ -25,9 +25,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background: #080b12 url(
-      "https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png"
-    ) center / cover fixed no-repeat;
+
+    background:
+        url("https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png")
+        center / cover fixed no-repeat;
 }
 
 /* PAGE PRINCIPALE */
@@ -36,13 +37,17 @@ body {
     width: 100%;
     max-width: 420px;
     height: 95vh;
+    height: 95dvh;
     max-height: 900px;
+
     background: #191a1d;
     border: 1px solid #303136;
     border-radius: 22px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
@@ -57,6 +62,7 @@ body {
 
 .header h1 {
     font-size: 28px;
+    font-weight: bold;
     margin-bottom: 12px;
 }
 
@@ -64,22 +70,27 @@ body {
     font-size: 14px;
     color: #e0e0e0;
     margin-top: 8px;
-    line-height: 1.5;
 }
 
-.demo-content {
-    flex: 1;
+/* QUESTIONNAIRE */
+
+.form-container {
     width: 100%;
+    flex: 1;
     min-height: 0;
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #ddd;
-    line-height: 1.7;
+    overflow: hidden;
     background: #191a1d;
 }
+
+.form-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    background: white;
+}
+
+/* BOUTON */
 
 .button-area {
     width: 100%;
@@ -88,22 +99,23 @@ body {
     background: #191a1d;
 }
 
-button {
+#launch {
     width: 100%;
     padding: 16px;
+
     background: #16a34a;
     color: white;
+
     border: none;
     border-radius: 10px;
-    font-size: 17px;
+
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
 }
 
-button:hover {
+#launch:hover {
     background: #15803d;
-    transform: scale(1.02);
 }
 
 /* TERMINAL MATRIX */
@@ -116,7 +128,7 @@ button:hover {
     height: 100vh;
     height: 100dvh;
     z-index: 9999;
-    background: black;
+    background: #000;
     overflow: hidden;
 }
 
@@ -127,26 +139,25 @@ button:hover {
     height: 100%;
 }
 
-/* TEXTE ET COMPTE À REBOURS */
-
 #status {
     position: absolute;
     top: 35%;
     left: 0;
     width: 100%;
+    padding: 20px;
     text-align: center;
+
     color: #00ff41;
     font-family: Consolas, monospace;
     font-size: clamp(20px, 5vw, 32px);
     text-shadow: 0 0 12px #00ff41;
-    padding: 20px;
     pointer-events: none;
 }
 
 #countdown {
     display: block;
     margin-top: 25px;
-    font-size: clamp(16px, 4vw, 22px);
+    font-size: 20px;
     color: #aaffbb;
 }
 
@@ -160,11 +171,10 @@ button:hover {
 }
 
 #progress {
-    height: 100%;
     width: 0%;
+    height: 100%;
     background: #00ff41;
-    box-shadow: 0 0 12px #00ff41;
-    transition: width 0.2s linear;
+    transition: width 0.1s linear;
 }
 
 /* ÉCRAN FINAL */
@@ -177,20 +187,22 @@ button:hover {
     height: 100vh;
     height: 100dvh;
     z-index: 10000;
+
     background: #000;
     color: #00ff41;
+
     align-items: center;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     padding: 25px;
+
     font-family: Consolas, monospace;
 }
 
 #result h1 {
     font-size: clamp(28px, 6vw, 48px);
     text-shadow: 0 0 10px #00ff41, 0 0 25px #00ff41;
-    animation: appear 1s ease-out;
 }
 
 #result p {
@@ -201,11 +213,19 @@ button:hover {
 
 #result button {
     margin-top: 30px;
+    width: 100%;
     max-width: 300px;
+    padding: 14px;
+
     border: 1px solid #00ff41;
+    border-radius: 8px;
+
     background: transparent;
     color: #00ff41;
+
     font-family: Consolas, monospace;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 #result button:hover {
@@ -216,20 +236,7 @@ button:hover {
 #closeMessage {
     display: none;
     color: #aaa;
-    margin-top: 20px;
     font-size: 14px;
-    line-height: 1.6;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 @media (max-width: 600px) {
@@ -253,8 +260,16 @@ button:hover {
         font-size: 24px;
     }
 
+    .header p {
+        font-size: 12px;
+    }
+
     .button-area {
         padding: 12px;
+    }
+
+    #launch {
+        font-size: 16px;
     }
 }
 </style>
@@ -268,18 +283,19 @@ button:hover {
 
     <div class="header">
         <h1>Questionnaire Xeno</h1>
-        <p>Bienvenue dans la démonstration visuelle.</p>
-        <p>Simulation Matrix indépendante.</p>
+        <p>Réponds au questionnaire ci-dessous.</p>
     </div>
 
-    <div class="demo-content">
-        <p>
-            Appuie sur le bouton ci-dessous pour lancer
-            une animation plein écran avec des caractères verts
-            et un compte à rebours de 10 secondes.
-            <br><br>
-            Démonstration visuelle uniquement.
-        </p>
+    <!-- Remplace l'URL ci-dessous par celle
+         d'un questionnaire sans identifiants de compte -->
+
+    <div class="form-container">
+        <iframe
+            src="URL_DE_TON_QUESTIONNAIRE"
+            title="Questionnaire"
+            loading="eager"
+            allow="clipboard-write">
+        </iframe>
     </div>
 
     <div class="button-area">
@@ -325,8 +341,9 @@ button:hover {
     </button>
 
     <p id="closeMessage">
-        Ton navigateur empêche la fermeture automatique.
-        Tu peux fermer cet onglet manuellement.
+        Ton navigateur ne permet pas de fermer
+        automatiquement cet onglet.
+        Ferme-le manuellement.
     </p>
 
 </div>
@@ -334,7 +351,6 @@ button:hover {
 <script>
 "use strict";
 
-// Éléments de la page
 const main = document.getElementById("main");
 const terminal = document.getElementById("terminal");
 const canvas = document.getElementById("matrix");
@@ -348,14 +364,12 @@ const result = document.getElementById("result");
 const closeButton = document.getElementById("closeButton");
 const closeMessage = document.getElementById("closeMessage");
 
-// Configuration
 const chars =
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
 
 const fontSize = 16;
 const duration = 10000;
 
-// Variables
 let width = 0;
 let height = 0;
 let drops = [];
@@ -365,7 +379,8 @@ let countdownInterval = null;
 let startTime = 0;
 let running = false;
 
-// Ajuster le canvas à l'écran
+// Adapter le canvas à l'écran
+
 function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
 
@@ -388,7 +403,8 @@ function resizeCanvas() {
     );
 }
 
-// Dessiner les caractères verts
+// Dessiner l'animation
+
 function draw() {
     if (!running) return;
 
@@ -421,30 +437,30 @@ function draw() {
     animationFrame = requestAnimationFrame(draw);
 }
 
-// Mettre à jour le compte à rebours
+// Compte à rebours
+
 function updateCountdown() {
+    if (!running) return;
+
     const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, duration - elapsed);
 
     const seconds = Math.ceil(remaining / 1000);
 
     countdownText.textContent =
-        "Temps restant : " + seconds + " seconde" +
-        (seconds > 1 ? "s" : "");
+        "Temps restant : " + seconds +
+        (seconds > 1 ? " secondes" : " seconde");
 
-    const percentage = Math.min(
-        100,
-        (elapsed / duration) * 100
-    );
-
-    progress.style.width = percentage + "%";
+    progress.style.width =
+        Math.min(100, elapsed / duration * 100) + "%";
 
     if (remaining <= 0) {
         finishSimulation();
     }
 }
 
-// Démarrer la simulation
+// Lancer la simulation
+
 function startSimulation() {
     if (running) return;
 
@@ -474,6 +490,7 @@ function startSimulation() {
 }
 
 // Terminer la simulation
+
 function finishSimulation() {
     if (!running) return;
 
@@ -493,7 +510,8 @@ function finishSimulation() {
     result.style.display = "flex";
 }
 
-// Redimensionner le canvas si nécessaire
+// Redimensionnement
+
 window.addEventListener("resize", () => {
     if (running) {
         resizeCanvas();
@@ -501,21 +519,17 @@ window.addEventListener("resize", () => {
 });
 
 // Bouton de lancement
+
 launchButton.addEventListener(
     "click",
     startSimulation
 );
 
-// Bouton pour fermer la page
-closeButton.addEventListener("click", () => {
-    // Les navigateurs autorisent généralement
-    // window.close() uniquement sur un onglet
-    // ouvert par JavaScript.
+// Bouton fermer
 
+closeButton.addEventListener("click", () => {
     window.close();
 
-    // Afficher une indication si l'onglet
-    // n'a pas pu être fermé.
     setTimeout(() => {
         closeMessage.style.display = "block";
     }, 300);
