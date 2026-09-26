@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Questionnaire Xeno</title>
+<title>Questionnaire Xeno - Démo</title>
 
 <style>
 * {
@@ -26,39 +25,27 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-
-    background-image: url(
-        "https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png"
-    );
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: #080b12 url(
+      "https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png"
+    ) center / cover fixed no-repeat;
 }
 
-/* PANNEAU PRINCIPAL */
+/* PAGE PRINCIPALE */
 
 .container {
     width: 100%;
     max-width: 420px;
     height: 95vh;
     max-height: 900px;
-
     background: #191a1d;
     border: 1px solid #303136;
     border-radius: 22px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     overflow: hidden;
-
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
-
-/* TITRE */
 
 .header {
     width: 100%;
@@ -70,8 +57,6 @@ body {
 
 .header h1 {
     font-size: 28px;
-    font-weight: bold;
-    line-height: 1.15;
     margin-bottom: 12px;
 }
 
@@ -79,26 +64,22 @@ body {
     font-size: 14px;
     color: #e0e0e0;
     margin-top: 8px;
+    line-height: 1.5;
 }
 
-/* QUESTIONNAIRE */
-
-.form-container {
-    width: 100%;
+.demo-content {
     flex: 1;
+    width: 100%;
     min-height: 0;
-    overflow: hidden;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ddd;
+    line-height: 1.7;
     background: #191a1d;
 }
-
-.form-container iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border: none;
-}
-
-/* BOUTON */
 
 .button-area {
     width: 100%;
@@ -107,116 +88,124 @@ body {
     background: #191a1d;
 }
 
-#launch {
+button {
     width: 100%;
     padding: 16px;
-
     background: #16a34a;
     color: white;
-
     border: none;
     border-radius: 10px;
-
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
-
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
-#launch:hover {
+button:hover {
     background: #15803d;
     transform: scale(1.02);
 }
 
-/* TERMINAL PLEIN ÉCRAN */
+/* TERMINAL MATRIX */
 
 #terminal {
     display: none;
-
     position: fixed;
     inset: 0;
-
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     height: 100dvh;
-
     z-index: 9999;
-
-    background: #000;
+    background: black;
     overflow: hidden;
 }
 
 #matrix {
     position: absolute;
     inset: 0;
-
-    display: block;
-
     width: 100%;
     height: 100%;
+}
+
+/* TEXTE ET COMPTE À REBOURS */
+
+#status {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #00ff41;
+    font-family: Consolas, monospace;
+    font-size: clamp(20px, 5vw, 32px);
+    text-shadow: 0 0 12px #00ff41;
+    padding: 20px;
+    pointer-events: none;
+}
+
+#countdown {
+    display: block;
+    margin-top: 25px;
+    font-size: clamp(16px, 4vw, 22px);
+    color: #aaffbb;
+}
+
+#progress-container {
+    width: min(80%, 400px);
+    height: 10px;
+    margin: 25px auto 0;
+    border: 1px solid #00ff41;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progress {
+    height: 100%;
+    width: 0%;
+    background: #00ff41;
+    box-shadow: 0 0 12px #00ff41;
+    transition: width 0.2s linear;
 }
 
 /* ÉCRAN FINAL */
 
 #result {
     display: none;
-
     position: fixed;
     inset: 0;
-
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     height: 100dvh;
-
     z-index: 10000;
-
     background: #000;
     color: #00ff41;
-
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
     text-align: center;
-    padding: 20px;
-
+    padding: 25px;
     font-family: Consolas, monospace;
 }
 
 #result h1 {
-    color: #00ff41;
-
-    font-size: clamp(28px, 6vw, 55px);
-
-    text-shadow:
-        0 0 10px #00ff41,
-        0 0 25px #00ff41;
-
+    font-size: clamp(28px, 6vw, 48px);
+    text-shadow: 0 0 10px #00ff41, 0 0 25px #00ff41;
     animation: appear 1s ease-out;
 }
 
 #result p {
     margin-top: 20px;
     font-size: 16px;
-    color: #00ff41;
+    line-height: 1.6;
 }
 
 #result button {
     margin-top: 30px;
-
-    padding: 12px 30px;
-
+    max-width: 300px;
     border: 1px solid #00ff41;
-    border-radius: 8px;
-
     background: transparent;
     color: #00ff41;
-
     font-family: Consolas, monospace;
-    font-size: 16px;
-
-    cursor: pointer;
 }
 
 #result button:hover {
@@ -224,22 +213,26 @@ body {
     color: black;
 }
 
+#closeMessage {
+    display: none;
+    color: #aaa;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
 @keyframes appear {
     from {
         opacity: 0;
         transform: scale(0.7);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
-/* MOBILE */
-
 @media (max-width: 600px) {
-
     body {
         padding: 5px;
         background-attachment: scroll;
@@ -260,16 +253,8 @@ body {
         font-size: 24px;
     }
 
-    .header p {
-        font-size: 12px;
-    }
-
     .button-area {
         padding: 12px;
-    }
-
-    #launch {
-        font-size: 16px;
     }
 }
 </style>
@@ -283,30 +268,44 @@ body {
 
     <div class="header">
         <h1>Questionnaire Xeno</h1>
-        <p>Réponds au questionnaire ci-dessous.</p>
-        <p>Démo visuelle uniquement.</p>
+        <p>Bienvenue dans la démonstration visuelle.</p>
+        <p>Simulation Matrix indépendante.</p>
     </div>
 
-    <div class="form-container">
-        <iframe
-            src="https://forms.fillout.com/t/7Z3Mt92LMgus"
-            title="Questionnaire Fillout"
-            loading="eager">
-        </iframe>
+    <div class="demo-content">
+        <p>
+            Appuie sur le bouton ci-dessous pour lancer
+            une animation plein écran avec des caractères verts
+            et un compte à rebours de 10 secondes.
+            <br><br>
+            Démonstration visuelle uniquement.
+        </p>
     </div>
 
     <div class="button-area">
-        <button id="launch" onclick="startSimulation()">
+        <button id="launch" type="button">
             Lancer la simulation
         </button>
     </div>
 
 </div>
 
-<!-- TERMINAL MATRIX PLEIN ÉCRAN -->
+<!-- ANIMATION MATRIX -->
 
 <div id="terminal">
     <canvas id="matrix"></canvas>
+
+    <div id="status">
+        SIMULATION EN COURS...
+
+        <span id="countdown">
+            Temps restant : 10 secondes
+        </span>
+
+        <div id="progress-container">
+            <div id="progress"></div>
+        </div>
+    </div>
 </div>
 
 <!-- ÉCRAN FINAL -->
@@ -315,134 +314,213 @@ body {
 
     <h1>SIMULATION TERMINÉE</h1>
 
-    <p>Démo visuelle terminée avec succès.</p>
+    <p>
+        La démonstration visuelle est terminée.
+        <br>
+        Tu peux fermer cette page.
+    </p>
 
-    <button onclick="location.reload()">
-        RETOUR
+    <button id="closeButton" type="button">
+        FERMER LA PAGE
     </button>
+
+    <p id="closeMessage">
+        Ton navigateur empêche la fermeture automatique.
+        Tu peux fermer cet onglet manuellement.
+    </p>
 
 </div>
 
 <script>
-let animationFrame;
-let matrixTimeout;
-let resizeHandler;
+"use strict";
 
-function startSimulation() {
+// Éléments de la page
+const main = document.getElementById("main");
+const terminal = document.getElementById("terminal");
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-    // Cacher toute la page principale
-    document.getElementById("main").style.display = "none";
+const launchButton = document.getElementById("launch");
+const countdownText = document.getElementById("countdown");
+const progress = document.getElementById("progress");
 
-    // Afficher le terminal
-    const terminal = document.getElementById("terminal");
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
+const result = document.getElementById("result");
+const closeButton = document.getElementById("closeButton");
+const closeMessage = document.getElementById("closeMessage");
 
-    terminal.style.display = "block";
+// Configuration
+const chars =
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
 
-    const chars =
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソ";
+const fontSize = 16;
+const duration = 10000;
 
-    const fontSize = 16;
+// Variables
+let width = 0;
+let height = 0;
+let drops = [];
 
-    let width;
-    let height;
-    let columns;
-    let drops;
+let animationFrame = null;
+let countdownInterval = null;
+let startTime = 0;
+let running = false;
 
-    // Adapter le canvas à TOUT l'écran
-    function resizeCanvas() {
+// Ajuster le canvas à l'écran
+function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
 
-        const dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
 
-        width = window.innerWidth;
-        height = window.innerHeight;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
 
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
 
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        ctx.setTransform(
-            dpr, 0,
-            0, dpr,
-            0, 0
-        );
+    const columns = Math.ceil(width / fontSize);
 
-        columns = Math.ceil(width / fontSize);
+    drops = Array.from(
+        { length: columns },
+        () => Math.random() * (height / fontSize)
+    );
+}
 
-        drops = Array.from(
-            { length: columns },
-            () => Math.random() * (height / fontSize)
-        );
-    }
+// Dessiner les caractères verts
+function draw() {
+    if (!running) return;
 
-    resizeHandler = resizeCanvas;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    ctx.fillRect(0, 0, width, height);
 
-    window.addEventListener("resize", resizeHandler);
+    ctx.font = fontSize + "px Consolas, monospace";
+    ctx.fillStyle = "#00ff41";
+    ctx.shadowColor = "#00ff41";
+    ctx.shadowBlur = 8;
 
-    // Animation des caractères verts
-    function draw() {
+    for (let i = 0; i < drops.length; i++) {
+        const index = Math.floor(Math.random() * chars.length);
+        const char = chars.charAt(index);
 
-        // Fond noir avec effet de traînée
-        ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
-        ctx.fillRect(0, 0, width, height);
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
 
-        ctx.font = fontSize + "px Consolas, monospace";
+        ctx.fillText(char, x, y);
 
-        for (let i = 0; i < drops.length; i++) {
-
-            const char = chars[
-                Math.floor(Math.random() * chars.length)
-            ];
-
-            const x = i * fontSize;
-            const y = drops[i] * fontSize;
-
-            // Vert lumineux
-            ctx.fillStyle = "#00ff41";
-            ctx.shadowColor = "#00ff41";
-            ctx.shadowBlur = 8;
-
-            ctx.fillText(char, x, y);
-
-            // Recommencer en haut après le bas de l'écran
-            if (
-                y > height &&
-                Math.random() > 0.975
-            ) {
-                drops[i] = 0;
-            }
-
-            // Vitesse de défilement
+        if (y > height && Math.random() > 0.975) {
+            drops[i] = 0;
+        } else {
             drops[i] += 0.7 + Math.random() * 1.5;
         }
-
-        ctx.shadowBlur = 0;
-
-        animationFrame = requestAnimationFrame(draw);
     }
 
-    // Démarrer l'animation
-    draw();
+    ctx.shadowBlur = 0;
 
-    // Arrêter après 5 secondes
-    matrixTimeout = setTimeout(() => {
-
-        cancelAnimationFrame(animationFrame);
-
-        window.removeEventListener(
-            "resize",
-            resizeHandler
-        );
-
-        terminal.style.display = "none";
-
-        document.getElementById("result").style.display = "flex";
-
-    }, 5000);
+    animationFrame = requestAnimationFrame(draw);
 }
+
+// Mettre à jour le compte à rebours
+function updateCountdown() {
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, duration - elapsed);
+
+    const seconds = Math.ceil(remaining / 1000);
+
+    countdownText.textContent =
+        "Temps restant : " + seconds + " seconde" +
+        (seconds > 1 ? "s" : "");
+
+    const percentage = Math.min(
+        100,
+        (elapsed / duration) * 100
+    );
+
+    progress.style.width = percentage + "%";
+
+    if (remaining <= 0) {
+        finishSimulation();
+    }
+}
+
+// Démarrer la simulation
+function startSimulation() {
+    if (running) return;
+
+    running = true;
+
+    main.style.display = "none";
+    result.style.display = "none";
+    terminal.style.display = "block";
+
+    closeMessage.style.display = "none";
+    progress.style.width = "0%";
+
+    resizeCanvas();
+
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, width, height);
+
+    startTime = Date.now();
+
+    draw();
+    updateCountdown();
+
+    countdownInterval = setInterval(
+        updateCountdown,
+        100
+    );
+}
+
+// Terminer la simulation
+function finishSimulation() {
+    if (!running) return;
+
+    running = false;
+
+    if (animationFrame !== null) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+    }
+
+    if (countdownInterval !== null) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    terminal.style.display = "none";
+    result.style.display = "flex";
+}
+
+// Redimensionner le canvas si nécessaire
+window.addEventListener("resize", () => {
+    if (running) {
+        resizeCanvas();
+    }
+});
+
+// Bouton de lancement
+launchButton.addEventListener(
+    "click",
+    startSimulation
+);
+
+// Bouton pour fermer la page
+closeButton.addEventListener("click", () => {
+    // Les navigateurs autorisent généralement
+    // window.close() uniquement sur un onglet
+    // ouvert par JavaScript.
+
+    window.close();
+
+    // Afficher une indication si l'onglet
+    // n'a pas pu être fermé.
+    setTimeout(() => {
+        closeMessage.style.display = "block";
+    }, 300);
+});
+
 </script>
 
 </body>
