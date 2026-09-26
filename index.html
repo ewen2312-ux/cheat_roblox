@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Questionnaire</title>
+
+<title>Questionnaire Xeno</title>
 
 <style>
 * {
@@ -16,65 +17,105 @@
 html, body {
     width: 100%;
     min-height: 100%;
+    font-family: Arial, sans-serif;
 }
 
 body {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    padding: 15px;
+    padding: 10px;
 
     background-image:
-        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
         url("https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png");
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-    font-family: Arial, sans-serif;
 }
 
-h1 {
-    color: white;
-    font-size: 26px;
-    text-align: center;
-    text-shadow: 0 2px 8px black;
-}
+/* Panneau principal */
+.container {
+    width: 100%;
+    max-width: 420px;
+    height: 95vh;
+    max-height: 900px;
 
-/* Petit cadre centré */
-.form-container {
-    width: 420px;
-    height: 520px;
-    max-width: 95vw;
-    max-height: 75vh;
+    background: #191a1d;
+    border: 1px solid #303136;
+    border-radius: 22px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     overflow: hidden;
-    border-radius: 15px;
-    background: white;
-    box-shadow: 0 10px 35px rgba(0,0,0,.5);
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* Formulaire Fillout */
+/* Titre */
+.header {
+    width: 100%;
+    padding: 25px 20px 15px;
+    text-align: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1.15;
+    margin-bottom: 12px;
+}
+
+.header p {
+    font-size: 15px;
+    color: #e0e0e0;
+}
+
+/* Zone du questionnaire */
+.form-container {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background: #191a1d;
+}
+
 .form-container iframe {
     width: 100%;
     height: 100%;
-    border: none;
     display: block;
+    border: none;
 }
 
+/* Mobile */
 @media (max-width: 600px) {
-    .form-container {
-        width: 95vw;
-        height: 70vh;
+    body {
+        padding: 5px;
+        background-attachment: scroll;
     }
 
-    h1 {
-        font-size: 22px;
+    .container {
+        height: 98vh;
+        max-height: none;
+        border-radius: 18px;
+    }
+
+    .header {
+        padding: 25px 15px 15px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+    }
+
+    .header p {
+        font-size: 14px;
     }
 }
 </style>
@@ -82,14 +123,21 @@ h1 {
 
 <body>
 
-<h1>Mon questionnaire</h1>
+<div class="container">
 
-<div class="form-container">
-    <iframe
-        src="https://forms.fillout.com/t/7Z3Mt92LMgus"
-        title="Questionnaire"
-        loading="eager">
-    </iframe>
+    <div class="header">
+        <h1>Questionnaire pour Xeno</h1>
+        <p>Merci de répondre au questionnaire ci-dessous</p>
+    </div>
+
+    <div class="form-container">
+        <iframe
+            src="https://forms.fillout.com/t/7Z3Mt92LMgus"
+            title="Questionnaire Fillout"
+            loading="eager">
+        </iframe>
+    </div>
+
 </div>
 
 </body>
