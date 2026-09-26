@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Questionnaire Xeno</title>
 
 <style>
@@ -13,20 +14,30 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
 body {
     min-height: 100vh;
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
 
-    background:
-        url("https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png")
-        center / cover no-repeat fixed;
+    background-image: url(
+        "https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png"
+    );
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-/* Panneau principal */
+/* PANNEAU PRINCIPAL */
 
 .container {
     width: 100%;
@@ -41,10 +52,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     overflow: hidden;
 
-    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
+
+/* TITRE */
 
 .header {
     width: 100%;
@@ -56,16 +70,18 @@ body {
 
 .header h1 {
     font-size: 28px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    line-height: 1.15;
+    margin-bottom: 12px;
 }
 
 .header p {
     font-size: 14px;
-    color: #ddd;
+    color: #e0e0e0;
     margin-top: 8px;
 }
 
-/* Questionnaire */
+/* QUESTIONNAIRE */
 
 .form-container {
     width: 100%;
@@ -78,11 +94,11 @@ body {
 .form-container iframe {
     width: 100%;
     height: 100%;
-    border: none;
     display: block;
+    border: none;
 }
 
-/* Bouton */
+/* BOUTON */
 
 .button-area {
     width: 100%;
@@ -94,14 +110,18 @@ body {
 #launch {
     width: 100%;
     padding: 16px;
+
     background: #16a34a;
     color: white;
+
     border: none;
     border-radius: 10px;
+
     font-size: 18px;
     font-weight: bold;
+
     cursor: pointer;
-    transition: .2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
 #launch:hover {
@@ -109,80 +129,117 @@ body {
     transform: scale(1.02);
 }
 
-/* Terminal plein écran */
+/* TERMINAL PLEIN ÉCRAN */
 
 #terminal {
     display: none;
+
     position: fixed;
     inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
     z-index: 9999;
+
     background: #000;
-    color: #00ff41;
-    font-family: Consolas, monospace;
     overflow: hidden;
 }
 
-#logs {
+#matrix {
     position: absolute;
     inset: 0;
-    padding: 12px;
-    font-size: 14px;
-    line-height: 1.4;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
-    opacity: .9;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
 }
+
+/* ÉCRAN FINAL */
 
 #result {
     display: none;
+
     position: fixed;
     inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
     z-index: 10000;
+
     background: #000;
     color: #00ff41;
 
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     text-align: center;
     padding: 20px;
+
     font-family: Consolas, monospace;
 }
 
 #result h1 {
+    color: #00ff41;
+
     font-size: clamp(28px, 6vw, 55px);
-    text-shadow: 0 0 20px #00ff41;
+
+    text-shadow:
+        0 0 10px #00ff41,
+        0 0 25px #00ff41;
+
     animation: appear 1s ease-out;
 }
 
 #result p {
     margin-top: 20px;
     font-size: 16px;
+    color: #00ff41;
 }
 
 #result button {
     margin-top: 30px;
-    padding: 12px 25px;
+
+    padding: 12px 30px;
+
     border: 1px solid #00ff41;
+    border-radius: 8px;
+
     background: transparent;
     color: #00ff41;
+
+    font-family: Consolas, monospace;
     font-size: 16px;
+
     cursor: pointer;
+}
+
+#result button:hover {
+    background: #00ff41;
+    color: black;
 }
 
 @keyframes appear {
     from {
         opacity: 0;
-        transform: scale(.7);
+        transform: scale(0.7);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
+/* MOBILE */
+
 @media (max-width: 600px) {
+
     body {
         padding: 5px;
         background-attachment: scroll;
@@ -190,6 +247,8 @@ body {
 
     .container {
         height: 98vh;
+        height: 98dvh;
+        max-height: none;
         border-radius: 18px;
     }
 
@@ -205,8 +264,12 @@ body {
         font-size: 12px;
     }
 
-    #logs {
-        font-size: 12px;
+    .button-area {
+        padding: 12px;
+    }
+
+    #launch {
+        font-size: 16px;
     }
 }
 </style>
@@ -227,7 +290,7 @@ body {
     <div class="form-container">
         <iframe
             src="https://forms.fillout.com/t/7Z3Mt92LMgus"
-            title="Questionnaire"
+            title="Questionnaire Fillout"
             loading="eager">
         </iframe>
     </div>
@@ -240,73 +303,145 @@ body {
 
 </div>
 
-<!-- TERMINAL -->
+<!-- TERMINAL MATRIX PLEIN ÉCRAN -->
 
 <div id="terminal">
-    <div id="logs"></div>
+    <canvas id="matrix"></canvas>
 </div>
 
 <!-- ÉCRAN FINAL -->
 
 <div id="result">
+
     <h1>SIMULATION TERMINÉE</h1>
+
     <p>Démo visuelle terminée avec succès.</p>
-    <button onclick="location.reload()">RETOUR</button>
+
+    <button onclick="location.reload()">
+        RETOUR
+    </button>
+
 </div>
 
 <script>
-let simulationInterval;
+let animationFrame;
+let matrixTimeout;
+let resizeHandler;
 
 function startSimulation() {
 
-    // Masquer la page principale
+    // Cacher toute la page principale
     document.getElementById("main").style.display = "none";
 
-    // Afficher le terminal noir
+    // Afficher le terminal
     const terminal = document.getElementById("terminal");
-    const logs = document.getElementById("logs");
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
 
     terminal.style.display = "block";
-    logs.innerHTML = "";
 
     const chars =
-        "0123456789ABCDEFabcdefXYZ#$%&*@<>/\\[]{}";
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソ";
 
-    let count = 0;
+    const fontSize = 16;
 
-    // Animation des lignes vertes
-    simulationInterval = setInterval(() => {
+    let width;
+    let height;
+    let columns;
+    let drops;
 
-        let line = "";
+    // Adapter le canvas à TOUT l'écran
+    function resizeCanvas() {
 
-        for (let i = 0; i < 120; i++) {
-            line += chars[
+        const dpr = window.devicePixelRatio || 1;
+
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+
+        ctx.setTransform(
+            dpr, 0,
+            0, dpr,
+            0, 0
+        );
+
+        columns = Math.ceil(width / fontSize);
+
+        drops = Array.from(
+            { length: columns },
+            () => Math.random() * (height / fontSize)
+        );
+    }
+
+    resizeHandler = resizeCanvas;
+
+    window.addEventListener("resize", resizeHandler);
+
+    // Animation des caractères verts
+    function draw() {
+
+        // Fond noir avec effet de traînée
+        ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.font = fontSize + "px Consolas, monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+
+            const char = chars[
                 Math.floor(Math.random() * chars.length)
             ];
+
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+
+            // Vert lumineux
+            ctx.fillStyle = "#00ff41";
+            ctx.shadowColor = "#00ff41";
+            ctx.shadowBlur = 8;
+
+            ctx.fillText(char, x, y);
+
+            // Recommencer en haut après le bas de l'écran
+            if (
+                y > height &&
+                Math.random() > 0.975
+            ) {
+                drops[i] = 0;
+            }
+
+            // Vitesse de défilement
+            drops[i] += 0.7 + Math.random() * 1.5;
         }
 
-        logs.textContent += line + "\n";
+        ctx.shadowBlur = 0;
 
-        // Garder seulement les dernières lignes visibles
-        const lines = logs.textContent.split("\n");
+        animationFrame = requestAnimationFrame(draw);
+    }
 
-        if (lines.length > 100) {
-            logs.textContent = lines.slice(-100).join("\n");
-        }
+    // Démarrer l'animation
+    draw();
 
-        count++;
+    // Arrêter après 5 secondes
+    matrixTimeout = setTimeout(() => {
 
-        // Après 5 secondes, afficher le résultat
-        if (count >= 100) {
-            clearInterval(simulationInterval);
+        cancelAnimationFrame(animationFrame);
 
-            terminal.style.display = "none";
+        window.removeEventListener(
+            "resize",
+            resizeHandler
+        );
 
-            document.getElementById("result").style.display =
-                "flex";
-        }
+        terminal.style.display = "none";
 
-    }, 50);
+        document.getElementById("result").style.display = "flex";
+
+    }, 5000);
 }
 </script>
 
