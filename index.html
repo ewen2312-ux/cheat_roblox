@@ -2,127 +2,95 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionnaire</title>
 
-    <title>Mon questionnaire</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
 
-        body {
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
 
-            /* Image de fond */
-            background:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.35),
-                    rgba(0, 0, 0, 0.55)
-                ),
-                url("https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png");
+    background-image:
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+        url("https://image.api.playstation.com/vulcan/ap/rnd/202504/1706/4cc02203db88b29b535c26b8296c89f983eaf48d67462e1d.png");
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+    font-family: Arial, sans-serif;
+}
 
-            padding: 25px 15px;
-        }
+h1 {
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    text-shadow: 0 2px 8px black;
+}
 
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px black;
-        }
+/* Petit cadre centré */
+.form-container {
+    width: 420px;
+    height: 520px;
+    max-width: 95vw;
+    max-height: 75vh;
 
-        header h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
+    overflow: hidden;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 10px 35px rgba(0,0,0,.5);
+}
 
-        header p {
-            font-size: 15px;
-        }
+/* Formulaire Fillout */
+.form-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
 
-        /* Cadre du questionnaire */
-        .questionnaire {
-            width: 100%;
-            max-width: 600px;
-            height: 600px;
+@media (max-width: 600px) {
+    .form-container {
+        width: 95vw;
+        height: 70vh;
+    }
 
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        footer {
-            color: white;
-            text-align: center;
-            margin-top: 18px;
-            font-size: 13px;
-            text-shadow: 0 2px 8px black;
-        }
-
-        /* Adaptation mobile */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 12px;
-                background-attachment: scroll;
-            }
-
-            header h1 {
-                font-size: 24px;
-            }
-
-            .questionnaire {
-                max-width: 100%;
-                height: 70vh;
-                min-height: 450px;
-                border-radius: 12px;
-            }
-        }
-    </style>
+    h1 {
+        font-size: 22px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Mon questionnaire</h1>
-        <p>Merci de prendre quelques minutes pour répondre !</p>
-    </header>
+<h1>Mon questionnaire</h1>
 
-    <main class="questionnaire">
-        <iframe
-            src="https://forms.fillout.com/t/ajgPh5QPfXus"
-            title="Questionnaire Fillout"
-            loading="lazy">
-        </iframe>
-    </main>
-
-    <footer>
-        Merci pour ta participation ❤️
-    </footer>
+<div class="form-container">
+    <iframe
+        src="https://forms.fillout.com/t/ajgPh5QPfXus"
+        title="Questionnaire"
+        loading="eager">
+    </iframe>
+</div>
 
 </body>
 </html>
